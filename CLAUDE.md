@@ -18,6 +18,17 @@ customers buy. Stack is not chosen yet: plan it with Lyle before building.
   business account and any buttons or payment links himself and pastes IDs into the
   page. Claude never enters PayPal credentials, never handles card data, never
   completes a test or real payment.
+- **Customer accounts (checked against the Artifact capability docs, 2026-10-19):**
+  Claude pages have no customer signup or login of their own. `db` and `user` work only
+  for signed-in claude.ai viewers (the owner's organization and invited guests); a
+  signed-out or public-link visitor gets `null`. So anonymous customers can likely
+  view a catalog, but cannot write orders to the page database or have accounts there.
+  Lyle wants products visible to anyone and an account only at purchase: PayPal
+  checkout (guest or PayPal account) plus PayPal's own order records is the likely fit.
+  **Test with a throwaway page opened in a private window before designing around any of this.**
+- **Decision (Lyle, 2026-10-19): build the simplified version first**: a public browse
+  catalog, with purchase through PayPal Goods and Services. No customer accounts or
+  order database on the page for now. Revisit only if the private-window test shows more is possible.
 - Pages may only load scripts from the Artifact tool's allowed hosts, so PayPal's JS SDK
   may be blocked. A plain PayPal payment link or hosted button is the likely fallback.
   Confirm before promising a checkout flow.
