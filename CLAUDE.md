@@ -20,9 +20,11 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   Falls back to a prefilled `mailto:` link when no endpoint is set.
 - **Shop identity (Lyle, 2026-10-19):** name **Retired Brick Co.**, public shop email
   `info@retiredbrickco.com`, domain `retiredbrickco.com`. Use these in place of the spec's
-  placeholders ("Your Brick Shop", `[your shop email]`). Whether Lyle owns the domain yet,
-  and whether the email forwarding to his Gmail is set up, is not confirmed. Never use
-  his personal email or home address on the site.
+  placeholders ("Your Brick Shop", `[your shop email]`). Lyle bought the domain at
+  Cloudflare Registrar and Cloudflare Email Routing forwards `info@` to a dedicated shop
+  Gmail account (tested and working, 2026-10-19). Replies can use Gmail "Send mail as"
+  (not set up yet). Never use his personal email or home address on the site, and
+  do not write the Gmail address into this repo.
 - **Selling rule: first come, first served.** Sets are limited; the earliest request gets
   the set. Replace the spec's "the set is held for you" wording on the confirmation and
   "How buying works" text with a first-come, first-served statement, for example that
