@@ -1,39 +1,35 @@
 # Brick Site
 
-Ecommerce site for Lyle's collection of retired LEGO sets held for resale. Shows what is
-for sale (set number, name, condition, box state, photos, asking price) and lets
-customers buy. Stack is not chosen yet: plan it with Lyle before building.
+Static storefront for Lyle's collection of retired LEGO sets held for resale. Buyers browse
+the listings and send a "Request to buy"; Lyle replies with the total and a PayPal Goods
+and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 2026-10-19).
 
-## Hosting and payments (Lyle's direction, 2026-10-19)
+## Decisions (Lyle, 2026-10-19) - these override the spec where they differ
 
-- **Hosting:** Claude's cloud (published Artifact pages). Lyle confirms anonymous
-  customers (no claude.ai login) can open the page. Artifacts are private by default and
-  sharing is Lyle's call. Still check the Artifact tool's limits for what a page can do.
-- **Orders and buyer details:** Lyle wants them stored on Claude Cloud, not on his
-  machine. Feasibility is unverified: check the page database capability, who can read
-  the data (anonymous visitors must not be able to read other buyers' orders), and how
-  it is exported. Do not store orders locally as a fallback without asking.
-- **Payments:** PayPal Goods and Services, chosen for buyer and seller protection. Lyle wants
-  PayPal's checkout to run on the page itself (not just a link). Lyle creates the PayPal
-  business account and any buttons or payment links himself and pastes IDs into the
-  page. Claude never enters PayPal credentials, never handles card data, never
-  completes a test or real payment.
-- **Customer accounts (checked against the Artifact capability docs, 2026-10-19):**
-  Claude pages have no customer signup or login of their own. `db` and `user` work only
-  for signed-in claude.ai viewers (the owner's organization and invited guests); a
-  signed-out or public-link visitor gets `null`. So anonymous customers can likely
-  view a catalog, but cannot write orders to the page database or have accounts there.
-  Lyle wants products visible to anyone and an account only at purchase: PayPal
-  checkout (guest or PayPal account) plus PayPal's own order records is the likely fit.
-  **Test with a throwaway page opened in a private window before designing around any of this.**
-- **Decision (Lyle, 2026-10-19): build the simplified version first**: a public browse
-  catalog, with purchase through PayPal Goods and Services. No customer accounts or
-  order database on the page for now. Revisit only if the private-window test shows more is possible.
-- Pages may only load scripts from the Artifact tool's allowed hosts, so PayPal's JS SDK
-  may be blocked. A plain PayPal payment link or hosted button is the likely fallback.
-  Confirm before promising a checkout flow.
-- Order records hold buyer contact details: keep them out of git, and do not put
-  other people's data in a shared page or database without Lyle deciding where it lives.
+- **Hosting: Cloudflare Pages** (free plan), deployed from the private GitHub repo, with
+  a custom domain later. Checked in docs: $0 plan, unlimited bandwidth, 500 builds a month,
+  20,000 files, 25 MiB per file. Domain registration is a separate yearly cost (not verified).
+  Not on Claude Cloud pages (no customer accounts or public database writes there).
+- **Payments: PayPal Goods and Services, plus cash at local pickup. Nothing else.** The
+  spec's Zelle and Venmo lines are removed because they carry no buyer or seller protection.
+  The site never collects payment data; Lyle sends the PayPal request himself after confirming.
+- **No customer accounts, cart or order database.** Browse is public; "Request to buy" is a form.
+- **Request form:** Formspree free tier emails requests to Lyle (50 submissions a month,
+  30 days of history, per Formspree's help docs; verify before launch). Buyer name, email and
+  ZIP therefore live in Lyle's email and at Formspree, not on his machine or in git.
+  Falls back to a prefilled `mailto:` link when no endpoint is set.
+- **Shop identity (Lyle, 2026-10-19):** name **Retired Brick Co.**, public shop email
+  `info@retiredbrickco.com`, domain `retiredbrickco.com`. Use these in place of the spec's
+  placeholders ("Your Brick Shop", `[your shop email]`). Whether Lyle owns the domain yet,
+  and whether the email forwarding to his Gmail is set up, is not confirmed. Never use
+  his personal email or home address on the site.
+- **Selling rule: first come, first served.** Sets are limited; the earliest request gets
+  the set. Replace the spec's "the set is held for you" wording on the confirmation and
+  "How buying works" text with a first-come, first-served statement, for example that
+  requests are answered in the order received and a set is not reserved until Lyle confirms.
+  Lyle marks a set `pending` or `sold` by hand.
+- Updating the site means editing `sets.json` and redeploying; mark a set `pending` or `sold`
+  by hand.
 
 ## Hard rules
 
@@ -55,27 +51,33 @@ customers buy. Stack is not chosen yet: plan it with Lyle before building.
 
 ## Environment
 
-- Own venv: `.\.venv\Scripts\python.exe` (Python 3.14). Install packages into it only,
-  never into system Python. Record them in `requirements.txt`.
-- Secrets go in `.env` (not committed); keep an `.env.example` with names only.
-- Port **8504** if a local dev server is used. In use elsewhere: 8501 XRP dashboard,
+- The site itself is plain HTML, CSS and vanilla JS: no framework, no build step. The
+  `.venv` (Python 3.14) is only for helper scripts (for example a later pricing helper);
+  install packages into it only and record them in `requirements.txt`.
+- Secrets go in `.env` (not committed); keep an `.env.example` with names only. Nothing
+  secret belongs in the site files: the Formspree endpoint is public by design.
+- Local preview: `python -m http.server 8504` from the site folder (port **8504**). In use elsewhere: 8501 XRP dashboard,
   8502 Options, 8503 Trade Agent, 2283 Immich.
 - Before stopping any process, check which project and which Windows account owns it
   (`18438` and `Tate` have their own sessions).
 
 ## Layout
 
-Empty so far. Record the real structure here once the stack is decided.
+Planned (nothing built yet); the real structure is recorded here once it exists.
 
 | Path | Purpose |
 |---|---|
-| `data/` | local inventory files and databases; ignored by git |
+| `docs/Storefront_Spec.md` | build spec |
+| `index.html`, `styles.css`, `app.js` | the site |
+| `sets.json` | public listings only: set facts, condition, asking price, status |
+| `images/` | Lyle's own photos, named by set number |
+| `data/` | private inventory (cost basis, purchase dates); ignored by git, never published |
 
 ## Working rules for this project
 
 - Plan first for anything bigger than a small edit; build; commit only when Lyle says.
-- Concrete numbers and comparison tables. Show the plan for stack choices (static site vs
-  Streamlit vs Flask) with trade-offs before installing anything.
+- Concrete numbers and comparison tables. Stack is settled (static site); plan the build
+  order from `docs/Storefront_Spec.md` and get Lyle's go-ahead before writing the site.
 - Write files without a BOM (`Set-Content -Encoding utf8` adds one on Windows PowerShell 5.1).
 - At the end of a piece of work, list what is uncommitted.
 
