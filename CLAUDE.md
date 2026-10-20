@@ -73,7 +73,9 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
 | `images/` | Lyle's own photos, named by set number |
 | `data/inventory.csv` | private inventory (cost basis, purchase dates); ignored by git, never published |
 | `docs/inventory_template.csv` | CSV header row to start from |
-| `scripts/build_sets.py` | copies only the public CSV columns into `sets.json`; refuses to write on errors or an empty CSV |
+
+`sets.json` is edited by hand (Lyle's decision, 2026-10-20). The CSV-to-JSON build script was
+removed so nothing can overwrite it; it is in git history (commit `b6c7c06`) if wanted later.
 
 ## Working rules for this project
 
