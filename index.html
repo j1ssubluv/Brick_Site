@@ -33,7 +33,7 @@
     <section class="hero">
       <div class="wrap">
         <span class="pill-tag">SOLD DIRECT · NO MARKETPLACE MARKUP</span>
-        <h1>LEGO sets priced fairly by market value.</h1>
+        <h1>Retired LEGO® sets, priced by market value.</h1>
         <p>Every set is photographed and described honestly. Pick one, send a request, and pay with PayPal Goods and Services. Shipped, or meet up for local pickup with cash.</p>
         <a class="btn" href="#sets">Browse the sets</a>
       </div>
@@ -43,13 +43,20 @@
       <div class="wrap">
         <div class="listings-head">
           <div>
-            <h2>Retired sets for sale</h2>
+            <h2>Sets for sale</h2>
             <p id="count" aria-live="polite"></p>
           </div>
-          <div class="filters" role="group" aria-label="Filter sets">
-            <button class="filter" type="button" data-filter="all" aria-pressed="true">All sets</button>
-            <button class="filter" type="button" data-filter="sealed" aria-pressed="false">New / sealed</button>
-            <button class="filter" type="button" data-filter="used" aria-pressed="false">Used / complete</button>
+          <div class="filter-groups">
+            <div class="filters" role="group" aria-label="Filter by condition">
+              <button class="filter" type="button" data-group="condition" data-filter="all" aria-pressed="true">All sets</button>
+              <button class="filter" type="button" data-group="condition" data-filter="sealed" aria-pressed="false">New / sealed</button>
+              <button class="filter" type="button" data-group="condition" data-filter="used" aria-pressed="false">Used / complete</button>
+            </div>
+            <div class="filters" role="group" aria-label="Filter by retirement status">
+              <button class="filter" type="button" data-group="retired" data-filter="all" aria-pressed="true">Retired and current</button>
+              <button class="filter" type="button" data-group="retired" data-filter="retired" aria-pressed="false">Retired</button>
+              <button class="filter" type="button" data-group="retired" data-filter="current" aria-pressed="false">Not yet retired</button>
+            </div>
           </div>
         </div>
 

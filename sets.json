@@ -8,7 +8,8 @@
     "conditionNotes": "",
     "price": null,
     "photos": [],
-    "status": "available"
+    "status": "available",
+    "retired": true
   },
   {
     "setNumber": "[00001]",
@@ -19,7 +20,8 @@
     "conditionNotes": "",
     "price": null,
     "photos": [],
-    "status": "available"
+    "status": "available",
+    "retired": true
   },
   {
     "setNumber": "[00002]",
@@ -30,7 +32,8 @@
     "conditionNotes": "",
     "price": null,
     "photos": [],
-    "status": "pending"
+    "status": "pending",
+    "retired": true
   },
   {
     "setNumber": "[00003]",
@@ -41,7 +44,8 @@
     "conditionNotes": "",
     "price": null,
     "photos": [],
-    "status": "available"
+    "status": "available",
+    "retired": true
   },
   {
     "setNumber": "[00004]",
@@ -52,7 +56,8 @@
     "conditionNotes": "",
     "price": null,
     "photos": [],
-    "status": "available"
+    "status": "available",
+    "retired": false
   },
   {
     "setNumber": "[00005]",
@@ -63,6 +68,7 @@
     "conditionNotes": "",
     "price": null,
     "photos": [],
-    "status": "sold"
+    "status": "sold",
+    "retired": true
   }
 ]

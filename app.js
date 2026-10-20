@@ -11,7 +11,7 @@ const done = document.getElementById("req-done");
 const errorEl = document.getElementById("req-error");
 
 let sets = [];
-let filter = "all";
+const filters = { condition: "all", retired: "all" };
 let current = null;
 let lastTrigger = null;
 
@@ -45,12 +45,21 @@ function photoBox(s) {
   return box;
 }
 
+// A set counts as retired unless sets.json says "retired": false.
+const isRetired = (s) => s.retired !== false;
+
 function badge(s) {
-  return el("span", "badge" + (s.condition === "sealed" ? " sealed" : ""), conditionLabel(s));
+  const wrap = el("div", "badges");
+  wrap.appendChild(el("span", "badge" + (s.condition === "sealed" ? " sealed" : ""), conditionLabel(s)));
+  if (!isRetired(s)) wrap.appendChild(el("span", "badge current", "Not yet retired"));
+  return wrap;
 }
 
 function render() {
-  const shown = sets.filter((s) => filter === "all" || s.condition === filter);
+  const shown = sets.filter((s) =>
+    (filters.condition === "all" || s.condition === filters.condition) &&
+    (filters.retired === "all" || (filters.retired === "retired") === isRetired(s))
+  );
   const avail = shown.filter((s) => s.status === "available").length;
   countEl.textContent = avail + (avail === 1 ? " set available" : " sets available");
   grid.replaceChildren();
@@ -189,8 +198,9 @@ document.addEventListener("keydown", (e) => {
 
 document.querySelectorAll(".filter").forEach((b) =>
   b.addEventListener("click", () => {
-    filter = b.dataset.filter;
-    document.querySelectorAll(".filter").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+    filters[b.dataset.group] = b.dataset.filter;
+    document.querySelectorAll('.filter[data-group="' + b.dataset.group + '"]')
+      .forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
     render();
   })
 );
