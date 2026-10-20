@@ -15,7 +15,12 @@ const filters = { condition: "all", retired: "all" };
 let current = null;
 let lastTrigger = null;
 
-const money = (n) => (n == null ? "[$ price]" : "$" + Number(n).toLocaleString("en-US"));
+// Whole dollars show without cents ($100); anything with cents shows two places ($12.50).
+const money = (n) => {
+  if (n == null) return "[$ price]";
+  const cents = !Number.isInteger(Number(n)) ? 2 : 0;
+  return "$" + Number(n).toLocaleString("en-US", { minimumFractionDigits: cents, maximumFractionDigits: cents });
+};
 const pieces = (n) => (n == null ? "[000] pieces" : Number(n).toLocaleString("en-US") + " pieces");
 
 // Entries with "type": "minifigure" use optional "figureNumber" and "series" instead of
@@ -59,7 +64,7 @@ const isRetired = (s) => s.retired !== false;
 function badge(s) {
   const wrap = el("div", "badges");
   wrap.appendChild(el("span", "badge" + (s.condition === "sealed" ? " sealed" : ""), conditionLabel(s)));
-  if (!isRetired(s)) wrap.appendChild(el("span", "badge current", "Not yet retired"));
+  wrap.appendChild(isRetired(s) ? el("span", "badge retired", "Retired") : el("span", "badge current", "Not yet retired"));
   return wrap;
 }
 
@@ -214,7 +219,12 @@ document.querySelectorAll(".filter").forEach((b) =>
 );
 
 syncZip();
-fetch("sets.json")
+fetch("sets.json", { cache: "no-cache" })
   .then((r) => r.json())
-  .then((data) => { sets = data; render(); })
+  .then((data) => {
+    // Tolerate "Sealed" / "Available " etc. so a capital letter in sets.json can't change a listing.
+    const norm = (v) => (typeof v === "string" ? v.trim().toLowerCase() : v);
+    sets = data.map((s) => ({ ...s, condition: norm(s.condition), status: norm(s.status), type: norm(s.type) }));
+    render();
+  })
   .catch(() => { countEl.textContent = "Listings could not be loaded. Please refresh."; });

@@ -82,6 +82,7 @@ nav a:hover { color: var(--accent); }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .badges { position: absolute; top: 12px; left: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
 .badges .badge { position: static; }
+.badge.retired { background: var(--ink); color: #fff; }
 .badge.current { background: var(--card); border: 1px solid var(--border-input); }
 .filter {
   min-height: 44px; padding: 0 18px; border-radius: 999px;
