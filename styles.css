@@ -1,4 +1,5 @@
 :root {
+  --brick: #22C55E;
   --accent: #1F5FBF;
   --accent-hover: #16478F;
   --ink: #1B1F24;
@@ -43,7 +44,8 @@ a { color: var(--accent); }
   justify-content: space-between; gap: 8px 24px; padding-top: 12px; padding-bottom: 12px;
 }
 .logo { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 700; font-size: 20px; color: var(--ink); text-decoration: none; }
-.logo svg { fill: var(--accent); }
+.logo { font-family: "Titan One", var(--display); font-weight: 400; font-size: 24px; letter-spacing: .01em; }
+.logo svg { fill: var(--brick); }
 nav { display: flex; flex-wrap: wrap; gap: 4px 8px; }
 nav a {
   display: inline-flex; align-items: center; min-height: 44px; padding: 0 10px;
