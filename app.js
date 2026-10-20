@@ -23,7 +23,8 @@ const pieces = (n) => (n == null ? "[000] pieces" : Number(n).toLocaleString("en
 const isFigure = (s) => s.type === "minifigure";
 const idLabel = (s) =>
   isFigure(s) ? "Minifigure" + (s.figureNumber ? " #" + s.figureNumber : "") : "Set #" + s.setNumber;
-const detail = (s) => (isFigure(s) ? idLabel(s) : idLabel(s) + " · " + pieces(s.pieces));
+const detail = (s) =>
+  [idLabel(s), isFigure(s) ? null : pieces(s.pieces), s.year].filter((p) => p != null).join(" · ");
 
 function conditionLabel(s) {
   if (s.condition === "sealed") return "New · Sealed";

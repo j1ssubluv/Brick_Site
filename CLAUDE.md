@@ -65,15 +65,15 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
 
 ## Layout
 
-Planned (nothing built yet); the real structure is recorded here once it exists.
-
 | Path | Purpose |
 |---|---|
-| `docs/Storefront_Spec.md` | build spec |
-| `index.html`, `styles.css`, `app.js` | the site |
-| `sets.json` | public listings only: set facts, condition, asking price, status |
+| `docs/Storefront_Spec.md`, `docs/BUILD_PLAN.md` | build spec and plan |
+| `index.html`, `styles.css`, `app.js` | the site (built 2026-10-20) |
+| `sets.json` | public listings only: set facts, year, condition, asking price, status, retired flag; minifigures use `"type": "minifigure"` |
 | `images/` | Lyle's own photos, named by set number |
-| `data/` | private inventory (cost basis, purchase dates); ignored by git, never published |
+| `data/inventory.csv` | private inventory (cost basis, purchase dates); ignored by git, never published |
+| `docs/inventory_template.csv` | CSV header row to start from |
+| `scripts/build_sets.py` | copies only the public CSV columns into `sets.json`; refuses to write on errors or an empty CSV |
 
 ## Working rules for this project
 
