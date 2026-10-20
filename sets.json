@@ -1,0 +1,68 @@
+[
+  {
+    "setNumber": "[00000]",
+    "name": "[Set name]",
+    "theme": "[Theme]",
+    "pieces": null,
+    "condition": "sealed",
+    "conditionNotes": "",
+    "price": null,
+    "photos": [],
+    "status": "available"
+  },
+  {
+    "setNumber": "[00001]",
+    "name": "[Set name]",
+    "theme": "[Theme]",
+    "pieces": null,
+    "condition": "sealed",
+    "conditionNotes": "",
+    "price": null,
+    "photos": [],
+    "status": "available"
+  },
+  {
+    "setNumber": "[00002]",
+    "name": "[Set name]",
+    "theme": "[Theme]",
+    "pieces": null,
+    "condition": "sealed",
+    "conditionNotes": "",
+    "price": null,
+    "photos": [],
+    "status": "pending"
+  },
+  {
+    "setNumber": "[00003]",
+    "name": "[Set name]",
+    "theme": "[Theme]",
+    "pieces": null,
+    "condition": "used",
+    "conditionNotes": "",
+    "price": null,
+    "photos": [],
+    "status": "available"
+  },
+  {
+    "setNumber": "[00004]",
+    "name": "[Set name]",
+    "theme": "[Theme]",
+    "pieces": null,
+    "condition": "used",
+    "conditionNotes": "",
+    "price": null,
+    "photos": [],
+    "status": "available"
+  },
+  {
+    "setNumber": "[00005]",
+    "name": "[Set name]",
+    "theme": "[Theme]",
+    "pieces": null,
+    "condition": "used",
+    "conditionNotes": "",
+    "price": null,
+    "photos": [],
+    "status": "sold"
+  }
+]
