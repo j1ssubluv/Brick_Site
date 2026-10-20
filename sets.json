@@ -70,5 +70,20 @@
     "photos": [],
     "status": "sold",
     "retired": true
+  },
+  {
+    "type": "minifigure",
+    "setNumber": "",
+    "figureNumber": "[figure #]",
+    "series": "[Series]",
+    "name": "[Minifigure name]",
+    "theme": "[Theme]",
+    "pieces": null,
+    "condition": "sealed",
+    "conditionNotes": "",
+    "price": null,
+    "photos": [],
+    "status": "available",
+    "retired": true
   }
 ]

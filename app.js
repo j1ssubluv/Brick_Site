@@ -18,6 +18,13 @@ let lastTrigger = null;
 const money = (n) => (n == null ? "[$ price]" : "$" + Number(n).toLocaleString("en-US"));
 const pieces = (n) => (n == null ? "[000] pieces" : Number(n).toLocaleString("en-US") + " pieces");
 
+// Entries with "type": "minifigure" use optional "figureNumber" and "series" instead of
+// setNumber and pieces; everything else is a set.
+const isFigure = (s) => s.type === "minifigure";
+const idLabel = (s) =>
+  isFigure(s) ? "Minifigure" + (s.figureNumber ? " #" + s.figureNumber : "") : "Set #" + s.setNumber;
+const detail = (s) => (isFigure(s) ? idLabel(s) : idLabel(s) + " · " + pieces(s.pieces));
+
 function conditionLabel(s) {
   if (s.condition === "sealed") return "New · Sealed";
   const first = (s.conditionNotes || "").split(/[.,;]/)[0].trim();
@@ -36,7 +43,7 @@ function photoBox(s) {
   if (s.photos && s.photos.length) {
     const img = el("img");
     img.src = s.photos[0];
-    img.alt = s.name + " (set " + s.setNumber + ")";
+    img.alt = s.name + " (" + idLabel(s) + ")";
     img.loading = "lazy";
     box.appendChild(img);
   } else {
@@ -69,9 +76,9 @@ function render() {
     photo.appendChild(badge(s));
     const body = el("div", "card-body");
     body.append(
-      el("p", "theme", s.theme),
+      el("p", "theme", isFigure(s) && s.series ? s.series : s.theme),
       el("h3", null, s.name),
-      el("p", "meta", "Set #" + s.setNumber + " · " + pieces(s.pieces))
+      el("p", "meta", detail(s))
     );
     const foot = el("div", "card-foot");
     foot.appendChild(el("span", "price", money(s.price)));
@@ -98,13 +105,13 @@ function openPanel(s, trigger) {
   sum.replaceChildren(
     photo,
     el("h3", null, s.name),
-    el("p", "meta", "Set #" + s.setNumber + " · " + pieces(s.pieces)),
+    el("p", "meta", detail(s)),
     el("p", "price", money(s.price))
   );
   form.hidden = false;
   done.hidden = true;
   errorEl.hidden = true;
-  form.elements.setNumber.value = s.setNumber;
+  form.elements.setNumber.value = isFigure(s) ? (s.figureNumber || "") : s.setNumber;
   form.elements.setName.value = s.name;
   form.elements.price.value = money(s.price);
   form.elements.condition.value = conditionLabel(s);
@@ -132,7 +139,7 @@ function validate() {
 function mailtoHref() {
   const f = form.elements;
   const lines = [
-    "Request to buy: " + current.name + " (Set #" + current.setNumber + ")",
+    "Request to buy: " + current.name + " (" + idLabel(current) + ")",
     "Asking price: " + f.price.value,
     "Condition: " + f.condition.value,
     "",
@@ -143,7 +150,7 @@ function mailtoHref() {
     f.message.value.trim(),
   ];
   return "mailto:" + SHOP_EMAIL +
-    "?subject=" + encodeURIComponent("Request: " + current.name + " #" + current.setNumber) +
+    "?subject=" + encodeURIComponent("Request: " + current.name + " (" + idLabel(current) + ")") +
     "&body=" + encodeURIComponent(lines.join("\n"));
 }
 
