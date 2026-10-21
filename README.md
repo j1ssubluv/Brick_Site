@@ -10,4 +10,11 @@ cd L:\vs.code\Py_Projects\Brick_Site
 pip install -r requirements.txt
 ```
 
-Stack not chosen yet. Dev port, if needed: 8504.
+Static site in `site/` (plain HTML, CSS and JS). Preview it from that folder:
+
+```
+cd site
+python -m http.server 8504
+```
+
+Then open http://localhost:8504. Only `site/` is published; edit listings in `site/sets.json`.

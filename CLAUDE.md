@@ -58,7 +58,7 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   install packages into it only and record them in `requirements.txt`.
 - Secrets go in `.env` (not committed); keep an `.env.example` with names only. Nothing
   secret belongs in the site files: the Formspree endpoint is public by design.
-- Local preview: `python -m http.server 8504` from the site folder (port **8504**). In use elsewhere: 8501 XRP dashboard,
+- Local preview: `python -m http.server 8504` run from the `site\` folder (port **8504**). In use elsewhere: 8501 XRP dashboard,
   8502 Options, 8503 Trade Agent, 2283 Immich.
 - Before stopping any process, check which project and which Windows account owns it
   (`18438` and `Tate` have their own sessions).
@@ -68,9 +68,10 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
 | Path | Purpose |
 |---|---|
 | `docs/Storefront_Spec.md`, `docs/BUILD_PLAN.md` | build spec and plan |
-| `index.html`, `styles.css`, `app.js` | the site (built 2026-10-20) |
-| `sets.json` | public listings only: set facts, year, condition, asking price, status, retired flag; minifigures use `"type": "minifigure"` |
-| `images/` | Lyle's own photos, named by set number |
+| `site/` | **The only folder that is published.** Cloudflare Pages output directory = `site`. Everything outside it (docs, notes, CSV, scripts) is never served. |
+| `site/index.html`, `site/styles.css`, `site/app.js` | the site (built 2026-10-20) |
+| `site/sets.json` | public listings only: set facts, year, condition, asking price, status, retired flag; minifigures use `"type": "minifigure"` |
+| `site/images/` | Lyle's own photos, named by set number; real JPEGs with GPS/EXIF stripped |
 | `data/inventory.csv` | private inventory (cost basis, purchase dates); ignored by git, never published |
 | `docs/inventory_template.csv` | CSV header row to start from |
 
