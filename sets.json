@@ -78,18 +78,31 @@
     "retired": true
   },
   {
+    "setNumber": "30200",
+    "name": "Zombie Chauffeur Coffin Car",
+    "theme": "Monster Fighters",
+    "year": 2021,
+    "pieces": 32,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 27.99,
+    "photos": ["images/30200.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "type": "minifigure",
     "setNumber": "",
     "figureNumber": "[figure #]",
-    "series": "[Series]",
-    "name": "[Minifigure name]",
-    "theme": "[Theme]",
+    "series": "",
+    "name": "",
+    "theme": "",
     "year": null,
     "pieces": null,
     "condition": "sealed",
-    "conditionNotes": "",
+    "conditionNotes": "Great condition",
     "price": null,
-    "photos": [],
+    "photos": [""],
     "status": "available",
     "retired": true
   }
