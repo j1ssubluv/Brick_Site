@@ -78,7 +78,7 @@ function badge(s) {
 const themeKey = (s) => (s.theme || "").trim().toLowerCase();
 const isPlaceholder = (t) => !t || t.startsWith("[");
 const searchText = (s) =>
-  [s.name, s.setNumber, s.figureNumber, s.series, s.theme, s.year]
+  [s.name, s.setNumber, s.figureNumber, s.series, s.theme, s.year, s.conditionNotes]
     .filter((v) => v != null && v !== "")
     .join(" ")
     .toLowerCase();
@@ -103,7 +103,8 @@ function render() {
     body.append(
       el("p", "theme", isFigure(s) && s.series ? s.series : s.theme),
       el("h3", null, s.name),
-      el("p", "meta", detail(s))
+      el("p", "meta", detail(s)),
+      ...(s.conditionNotes ? [el("p", "notes", s.conditionNotes)] : [])
     );
     const foot = el("div", "card-foot");
     foot.appendChild(el("span", "price", money(s.price)));
@@ -131,6 +132,7 @@ function openPanel(s, trigger) {
     photo,
     el("h3", null, s.name),
     el("p", "meta", detail(s)),
+    ...(s.conditionNotes ? [el("p", "notes full", s.conditionNotes)] : []),
     el("p", "price", money(s.price))
   );
   form.hidden = false;
