@@ -60,6 +60,18 @@
           </div>
         </div>
 
+        <div class="tools">
+          <div class="tool">
+            <label for="search">Search</label>
+            <input type="search" id="search" placeholder="Name, set number or theme" autocomplete="off" maxlength="100">
+          </div>
+          <div class="tool">
+            <label for="theme-select">Theme</label>
+            <select id="theme-select"><option value="all">All themes</option></select>
+          </div>
+          <button class="btn secondary" type="button" id="clear-filters" hidden>Clear filters</button>
+        </div>
+
         <section class="request" id="request" aria-labelledby="req-title" hidden>
           <button class="close" type="button" id="req-close" aria-label="Close request form">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 4l12 12M16 4L4 16"/></svg>

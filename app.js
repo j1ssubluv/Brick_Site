@@ -11,7 +11,12 @@ const done = document.getElementById("req-done");
 const errorEl = document.getElementById("req-error");
 
 let sets = [];
-const filters = { condition: "all", retired: "all" };
+const themeSelect = document.getElementById("theme-select");
+const searchInput = document.getElementById("search");
+const clearBtn = document.getElementById("clear-filters");
+
+const DEFAULTS = { condition: "all", retired: "all", theme: "all", q: "" };
+const filters = { ...DEFAULTS };
 let current = null;
 let lastTrigger = null;
 
@@ -68,14 +73,28 @@ function badge(s) {
   return wrap;
 }
 
+// Themes are matched case-insensitively ("Star Wars" = "star wars"). Bracketed or empty
+// themes are placeholders and stay out of the dropdown.
+const themeKey = (s) => (s.theme || "").trim().toLowerCase();
+const isPlaceholder = (t) => !t || t.startsWith("[");
+const searchText = (s) =>
+  [s.name, s.setNumber, s.figureNumber, s.series, s.theme, s.year]
+    .filter((v) => v != null && v !== "")
+    .join(" ")
+    .toLowerCase();
+
 function render() {
+  const tokens = filters.q.toLowerCase().replace(/#/g, "").split(/\s+/).filter(Boolean);
   const shown = sets.filter((s) =>
     (filters.condition === "all" || s.condition === filters.condition) &&
-    (filters.retired === "all" || (filters.retired === "retired") === isRetired(s))
+    (filters.retired === "all" || (filters.retired === "retired") === isRetired(s)) &&
+    (filters.theme === "all" || themeKey(s) === filters.theme) &&
+    tokens.every((t) => searchText(s).includes(t))
   );
   const avail = shown.filter((s) => s.status === "available").length;
   countEl.textContent = avail + (avail === 1 ? " set available" : " sets available");
   grid.replaceChildren();
+  if (!shown.length) grid.appendChild(el("p", "empty", "No sets match. Try a different search or clear the filters."));
   shown.forEach((s, i) => {
     const card = el("article", "card" + (s.status === "sold" ? " is-sold" : ""));
     const photo = photoBox(s);
@@ -209,14 +228,69 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !panel.hidden) closePanel();
 });
 
+function buildThemeSelect() {
+  const seen = new Map(); // lowercase key -> { label (first spelling seen), count of available }
+  sets.forEach((s) => {
+    const t = (s.theme || "").trim();
+    if (isPlaceholder(t)) return;
+    const e = seen.get(t.toLowerCase()) || { label: t, n: 0 };
+    if (s.status === "available") e.n++;
+    seen.set(t.toLowerCase(), e);
+  });
+  themeSelect.replaceChildren(new Option("All themes", "all"));
+  [...seen]
+    .sort((a, b) => a[1].label.localeCompare(b[1].label))
+    .forEach(([k, e]) => themeSelect.add(new Option(e.label + " (" + e.n + ")", k)));
+}
+
+// Shareable view: the filters live in the address bar, e.g. #theme=star+wars&condition=sealed&q=ghost.
+// Links that are just an anchor (#sets, #how) are left alone.
+function writeHash() {
+  const p = new URLSearchParams();
+  Object.keys(DEFAULTS).forEach((k) => { if (filters[k] !== DEFAULTS[k]) p.set(k, filters[k]); });
+  const s = p.toString();
+  history.replaceState(null, "", location.pathname + location.search + (s ? "#" + s : ""));
+}
+
+function readHash() {
+  const h = location.hash.slice(1);
+  if (!h.includes("=")) return false;
+  const p = new URLSearchParams(h);
+  const pick = (k, allowed) => (allowed.includes(p.get(k)) ? p.get(k) : DEFAULTS[k]);
+  filters.condition = pick("condition", ["all", "sealed", "used"]);
+  filters.retired = pick("retired", ["all", "retired", "current"]);
+  const t = (p.get("theme") || "").toLowerCase();
+  filters.theme = [...themeSelect.options].some((o) => o.value === t) ? t : "all";
+  filters.q = (p.get("q") || "").slice(0, 100);
+  return true;
+}
+
+function syncControls() {
+  document.querySelectorAll(".filter").forEach((b) =>
+    b.setAttribute("aria-pressed", String(filters[b.dataset.group] === b.dataset.filter)));
+  themeSelect.value = filters.theme;
+  if (searchInput.value !== filters.q) searchInput.value = filters.q;
+  clearBtn.hidden = Object.keys(DEFAULTS).every((k) => filters[k] === DEFAULTS[k]);
+}
+
+function update() {
+  syncControls();
+  render();
+  writeHash();
+}
+
 document.querySelectorAll(".filter").forEach((b) =>
   b.addEventListener("click", () => {
     filters[b.dataset.group] = b.dataset.filter;
-    document.querySelectorAll('.filter[data-group="' + b.dataset.group + '"]')
-      .forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-    render();
+    update();
   })
 );
+themeSelect.addEventListener("change", () => { filters.theme = themeSelect.value; update(); });
+searchInput.addEventListener("input", () => { filters.q = searchInput.value; update(); });
+clearBtn.addEventListener("click", () => { Object.assign(filters, DEFAULTS); update(); });
+window.addEventListener("hashchange", () => {
+  if (readHash()) { syncControls(); render(); }
+});
 
 syncZip();
 fetch("sets.json", { cache: "no-cache" })
@@ -225,6 +299,10 @@ fetch("sets.json", { cache: "no-cache" })
     // Tolerate "Sealed" / "Available " etc. so a capital letter in sets.json can't change a listing.
     const norm = (v) => (typeof v === "string" ? v.trim().toLowerCase() : v);
     sets = data.map((s) => ({ ...s, condition: norm(s.condition), status: norm(s.status), type: norm(s.type) }));
+    buildThemeSelect();
+    const shared = readHash();
+    syncControls();
     render();
+    if (shared) document.getElementById("sets").scrollIntoView();
   })
   .catch(() => { countEl.textContent = "Listings could not be loaded. Please refresh."; });
