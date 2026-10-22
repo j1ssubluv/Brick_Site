@@ -9,7 +9,7 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
 - **Hosting: Cloudflare** (free plan), deployed from the private GitHub repo. Live 2026-10-22 as a
   Worker with static assets (`wrangler.jsonc`, project `brick-site`) because the dashboard no
   longer offered Pages; every push to `master` redeploys. Custom domain `retiredbrickco.com` and
-  `www` go under the project's Domains & Routes (attach status not confirmed yet). Checked in docs: $0 plan, unlimited bandwidth, 500 builds a month,
+  `www` are attached under the project's Domains & Routes (both live, confirmed 2026-10-22). "Always Use HTTPS" is on. Security headers and CSP live in `site/_headers`. Checked in docs: $0 plan, unlimited bandwidth, 500 builds a month,
   20,000 files, 25 MiB per file. Domain registration is a separate yearly cost (not verified).
   Not on Claude Cloud pages (no customer accounts or public database writes there).
 - **Payments: PayPal Goods and Services, plus cash at local pickup. Nothing else.** The

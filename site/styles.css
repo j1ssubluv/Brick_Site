@@ -37,6 +37,10 @@ a { color: var(--accent); }
 
 [hidden] { display: none !important; }
 
+/* Shipping bar */
+.ship-bar { background: var(--yellow); color: var(--ink); font-size: 14px; text-align: center; padding: 8px 0; }
+.ship-bar .wrap { line-height: 1.4; }
+
 /* Header */
 .site-header { background: var(--card); border-bottom: 1px solid var(--border); }
 .site-header .wrap {
