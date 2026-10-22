@@ -1,6 +1,6 @@
 // Formspree endpoint, e.g. "https://formspree.io/f/xxxxxxxx". Public by design.
 // Leave empty to fall back to a prefilled mailto: link.
-const FORMSPREE_ENDPOINT = "";
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mzeepkwr";
 const SHOP_EMAIL = "info@retiredbrickco.com";
 
 const grid = document.getElementById("grid");
