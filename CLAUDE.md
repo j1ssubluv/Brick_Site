@@ -6,8 +6,10 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
 
 ## Decisions (Lyle, 2026-10-19) - these override the spec where they differ
 
-- **Hosting: Cloudflare Pages** (free plan), deployed from the private GitHub repo, with
-  a custom domain later. Checked in docs: $0 plan, unlimited bandwidth, 500 builds a month,
+- **Hosting: Cloudflare** (free plan), deployed from the private GitHub repo. Live 2026-10-22 as a
+  Worker with static assets (`wrangler.jsonc`, project `brick-site`) because the dashboard no
+  longer offered Pages; every push to `master` redeploys. Custom domain `retiredbrickco.com` and
+  `www` go under the project's Domains & Routes (attach status not confirmed yet). Checked in docs: $0 plan, unlimited bandwidth, 500 builds a month,
   20,000 files, 25 MiB per file. Domain registration is a separate yearly cost (not verified).
   Not on Claude Cloud pages (no customer accounts or public database writes there).
 - **Payments: PayPal Goods and Services, plus cash at local pickup. Nothing else.** The
@@ -68,7 +70,8 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
 | Path | Purpose |
 |---|---|
 | `docs/Storefront_Spec.md`, `docs/BUILD_PLAN.md` | build spec and plan |
-| `site/` | **The only folder that is published.** Cloudflare Pages output directory = `site`. Everything outside it (docs, notes, CSV, scripts) is never served. |
+| `wrangler.jsonc` | Cloudflare deploy config: Worker `brick-site`, assets directory `./site` |
+| `site/` | **The only folder that is published.** `wrangler.jsonc` publishes `site/` only. Everything outside it (docs, notes, CSV, scripts) is never served. |
 | `site/index.html`, `site/styles.css`, `site/app.js` | the site (built 2026-10-20) |
 | `site/sets.json` | public listings only: set facts, year, condition, asking price, status, retired flag; minifigures use `"type": "minifigure"` |
 | `site/images/` | Lyle's own photos, named by set number; real JPEGs with GPS/EXIF stripped |
@@ -90,4 +93,4 @@ removed so nothing can overwrite it; it is in git history (commit `b6c7c06`) if 
 
 Branch `master`. Two remotes, push to both: `local-backup` (bare repo in
 `C:\GitBackups\Brick_Site.git`) and `origin` (private GitHub `j1ssubluv/Brick_Site`,
-Lyle creates it). No commits yet.
+Lyle created it).

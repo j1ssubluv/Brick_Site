@@ -19,27 +19,29 @@ python -m http.server 8504
 
 Then open http://localhost:8504. Only `site/` is published; edit listings in `site/sets.json`.
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare Workers static assets)
 
-Hosting is Cloudflare Pages on the free plan, deployed from the private GitHub repo
-`j1ssubluv/Brick_Site`. Only the `site/` folder is published.
+Hosting is Cloudflare on the free plan, deployed from the private GitHub repo
+`j1ssubluv/Brick_Site`. Cloudflare's dashboard now creates a Worker project instead of a
+Pages project; `wrangler.jsonc` at the repo root names `site/` as the only folder published,
+so `docs/`, `CLAUDE.md`, `data/` and the scripts are never served.
 
-### First deploy
+Live: https://brick-site.retiredbrickco.workers.dev (first deployed 2026-10-22).
 
-1. Cloudflare dashboard: **Workers & Pages** > **Create** > **Pages** > **Connect to Git**.
-2. Authorize GitHub and pick the `Brick_Site` repo.
-3. Build settings:
-   - Production branch: `master`
-   - Framework preset: **None**
-   - Build command: leave blank
-   - Build output directory: `site`
-4. **Save and Deploy**. The site goes live at a `*.pages.dev` address.
+### First deploy (done)
+
+1. Dashboard: **Workers & Pages** > **Create an app** > **Import a repository**, pick `Brick_Site`.
+2. Project name `brick-site`, build command blank, deploy command `npx wrangler deploy`.
+3. Turn **Preview builds** off, leave **Protect with Cloudflare Access** off, and let Cloudflare
+   create the API token for the build.
+4. **Deploy**. Check that `/CLAUDE.md`, `/docs/` and `/data/inventory.csv` return 404.
 
 ### Custom domain
 
-1. In the Pages project: **Custom domains** > **Set up a custom domain** > `retiredbrickco.com`.
-2. The domain is registered at Cloudflare, so the DNS record is added for you. Confirm it.
-3. Wait for the certificate to finish (usually a few minutes), then open the site over `https`.
+Project **Settings** > **Domains & Routes** > **Add** > **Custom domain**. Add both
+`www.retiredbrickco.com` and `retiredbrickco.com`; they are separate names. DNS and the
+certificate are automatic because the domain is registered at Cloudflare. Leave the MX and
+TXT records alone (they carry `info@` email forwarding).
 
 ### Updating listings
 
@@ -54,8 +56,8 @@ Hosting is Cloudflare Pages on the free plan, deployed from the private GitHub r
 - Send a test request and confirm it reaches `info@retiredbrickco.com`.
 - Check the photos for GPS data, and that every `photos` entry in `sets.json` points at a file that exists.
 - PayPal Goods and Services requests are sent by hand after Lyle confirms a request. The site never takes payment.
+  PayPal's fee is about 3.49% + $0.49 per sale, or 2.99% + $0.49 for cards (PayPal fee page, 2026-10-22).
 
 ### Rollback
 
-Pages keeps every deploy. In the project's **Deployments** tab, pick an earlier one and
-choose **Rollback to this deployment**.
+Project **Deployments** tab: pick an earlier version and roll back to it.
