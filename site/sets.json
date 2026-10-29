@@ -169,6 +169,19 @@
     "retired": true
   },
   {
+    "setNumber": "75103",
+    "name": "First Order Transporter",
+    "theme": "Star Wars",
+    "year": 2015,
+    "pieces": 792,
+    "condition": "sealed",
+    "conditionNotes": "Good condition",
+    "price": 190.00,
+    "photos": ["images/75103.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "setNumber": "75148",
     "name": "Encounter on Jakku",
     "theme": "Star Wars",
@@ -503,6 +516,19 @@
     "conditionNotes": "Great condition",
     "price": 18.00,
     "photos": ["images/60358.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "71040",
+    "name": "Disney Castle",
+    "theme": "Disney",
+    "year": 2016,
+    "pieces": 4080,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 475.00,
+    "photos": ["images/71040.jpg"],
     "status": "available",
     "retired": true
   },
