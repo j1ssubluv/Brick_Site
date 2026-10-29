@@ -338,6 +338,19 @@
     "retired": true
   },
   {
+    "setNumber": "76912",
+    "name": "Fast & Furious 1970 Dodge Charger R/T",
+    "theme": "Speed Champions",
+    "year": 2023,
+    "pieces": 345,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 50.00,
+    "photos": ["images/76912.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "type": "minifigure",
     "setNumber": "",
     "figureNumber": "[figure #]",
