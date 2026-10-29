@@ -117,6 +117,32 @@
     "retired": true
   },
   {
+    "setNumber": "71006",
+    "name": "The Simpsons House",
+    "theme": "The Simpsons",
+    "year": 2014,
+    "pieces": 2523,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 700.00,
+    "photos": ["images/71006.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "71006",
+    "name": "The Simpsons House",
+    "theme": "The Simpsons",
+    "year": 2014,
+    "pieces": 2523,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 700.00,
+    "photos": ["images/71006.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "setNumber": "71042",
     "name": "Silent Mary",
     "theme": "Pirates of the Caribbean",
