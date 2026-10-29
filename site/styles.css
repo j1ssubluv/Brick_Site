@@ -120,7 +120,10 @@ nav a:hover { color: var(--accent); }
 .theme { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0; }
 .card h3 { font-size: 18px; margin: 4px 0; }
 .meta { color: var(--muted); font-size: 14px; margin: 0 0 16px; }
-.meta:has(+ .notes) { margin-bottom: 8px; }
+.meta:has(+ .notes), .meta:has(+ .stock), .notes:has(+ .stock) { margin-bottom: 8px; }
+.stock { margin: 0 0 16px; font-size: 14px; font-weight: 600; color: var(--ok); }
+.stock.low { color: #A3241D; }
+.request .stock { margin: 0 0 8px; }
 .notes {
   margin: 0 0 16px; font-size: 14px; color: var(--text-2);
   display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
@@ -128,6 +131,7 @@ nav a:hover { color: var(--accent); }
 .notes.full { display: block; overflow: visible; margin: 0 0 12px; }
 .card-foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .price { font-size: 24px; font-weight: 700; white-space: nowrap; }
+.price .unit { font-size: 14px; font-weight: 500; color: var(--muted); }
 .status-pill {
   display: inline-flex; align-items: center; min-height: 36px; padding: 0 14px;
   border-radius: 999px; font-size: 14px; font-weight: 600;
@@ -154,6 +158,10 @@ nav a:hover { color: var(--accent); }
 .field label, .field legend { font-weight: 600; font-size: 14px; margin-bottom: 4px; padding: 0; }
 .field input[type=text], .field input[type=email], .field textarea {
   min-height: 44px; padding: 8px 12px; border: 1px solid var(--border-input);
+  border-radius: 8px; font: 16px var(--body); color: var(--ink);
+}
+.field input[type=number] {
+  min-height: 44px; width: 120px; padding: 8px 12px; border: 1px solid var(--border-input);
   border-radius: 8px; font: 16px var(--body); color: var(--ink);
 }
 .field textarea { min-height: 96px; resize: vertical; }

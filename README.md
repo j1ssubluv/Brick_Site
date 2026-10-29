@@ -49,6 +49,14 @@ TXT records alone (they carry `info@` email forwarding).
 2. Preview locally (see Setup), then commit and push to `master` on both remotes.
 3. Cloudflare redeploys on every push to `master`. Mark a set `pending` or `sold` the same way.
 
+### Several copies of one item (quantity)
+
+Add `"quantity": 12` to an entry that has more than one copy, for example one figure from a series.
+The card shows "12 available" (or "Only 3 left" at 3 or fewer), the price shows "each", and the
+request form asks "How many?". When a copy sells, lower the number in `site/sets.json`, commit and
+push. At `"quantity": 0` the listing shows as Sold on its own. Entries without `quantity` behave
+as a single item. The count only changes when you edit the file, so two buyers can still request the
+last copy; first come, first served, and nothing is reserved until you confirm.
 ### Before launch
 
 - Set `FORMSPREE_ENDPOINT` in `site/app.js` to the Formspree form URL. While it is blank, the

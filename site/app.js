@@ -36,6 +36,12 @@ const idLabel = (s) =>
 const detail = (s) =>
   [idLabel(s), isFigure(s) ? null : pieces(s.pieces), s.year].filter((p) => p != null).join(" · ");
 
+// Optional "quantity" on an entry (for example several copies of one minifigure). It shows
+// "N available" / "Only N left" and adds a "How many?" box to the request form. At 0 the
+// listing shows as Sold by itself. Entries without it behave as a single item.
+const hasQty = (s) => s.quantity != null;
+const stockLabel = (s) => (s.quantity <= 3 ? "Only " + s.quantity + " left" : s.quantity + " available");
+
 function conditionLabel(s) {
   if (s.condition === "sealed") return "New · Sealed";
   const first = (s.conditionNotes || "").split(/[.,;]/)[0].trim();
@@ -104,10 +110,13 @@ function render() {
       el("p", "theme", isFigure(s) && s.series ? s.series : s.theme),
       el("h3", null, s.name),
       el("p", "meta", detail(s)),
-      ...(s.conditionNotes ? [el("p", "notes", s.conditionNotes)] : [])
+      ...(s.conditionNotes ? [el("p", "notes", s.conditionNotes)] : []),
+      ...(hasQty(s) && s.status === "available" ? [el("p", "stock" + (s.quantity <= 3 ? " low" : ""), stockLabel(s))] : [])
     );
     const foot = el("div", "card-foot");
-    foot.appendChild(el("span", "price", money(s.price)));
+    const price = el("span", "price", money(s.price));
+    if (hasQty(s) && s.quantity > 1) price.appendChild(el("span", "unit", " each"));
+    foot.appendChild(price);
     if (s.status === "available") {
       const b = el("button", "btn", "Request to buy");
       b.type = "button";
@@ -133,15 +142,21 @@ function openPanel(s, trigger) {
     el("h3", null, s.name),
     el("p", "meta", detail(s)),
     ...(s.conditionNotes ? [el("p", "notes full", s.conditionNotes)] : []),
-    el("p", "price", money(s.price))
+    ...(hasQty(s) ? [el("p", "stock" + (s.quantity <= 3 ? " low" : ""), stockLabel(s))] : []),
+    el("p", "price", money(s.price) + (hasQty(s) && s.quantity > 1 ? " each" : ""))
   );
   form.hidden = false;
   done.hidden = true;
   errorEl.hidden = true;
   form.elements.setNumber.value = isFigure(s) ? (s.figureNumber || "") : s.setNumber;
   form.elements.setName.value = s.name;
-  form.elements.price.value = money(s.price);
+  const multi = hasQty(s) && s.quantity > 1;
+  form.elements.price.value = money(s.price) + (multi ? " each" : "");
   form.elements.condition.value = conditionLabel(s);
+  document.getElementById("qty-field").hidden = !multi;
+  form.elements.quantity.max = multi ? s.quantity : 1;
+  form.elements.quantity.value = 1;
+  document.getElementById("qty-label").textContent = multi ? "How many? (up to " + s.quantity + ")" : "How many?";
   panel.hidden = false;
   panel.scrollIntoView({ behavior: "smooth", block: "start" });
   document.getElementById("f-name").focus({ preventScroll: true });
@@ -160,6 +175,11 @@ function validate() {
   if (!form.elements.name.value.trim()) return "Please enter your name.";
   const email = form.elements.email.value.trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return "Please enter a valid email address.";
+  if (!document.getElementById("qty-field").hidden) {
+    const q = Number(form.elements.quantity.value);
+    const max = Number(form.elements.quantity.max);
+    if (!Number.isInteger(q) || q < 1 || q > max) return "Please choose a quantity from 1 to " + max + ".";
+  }
   return "";
 }
 
@@ -169,6 +189,7 @@ function mailtoHref() {
     "Request to buy: " + current.name + " (" + idLabel(current) + ")",
     "Asking price: " + f.price.value,
     "Condition: " + f.condition.value,
+    ...(document.getElementById("qty-field").hidden ? [] : ["Quantity: " + f.quantity.value]),
     "",
     "Name: " + f.name.value.trim(),
     "Email: " + f.email.value.trim(),
@@ -300,7 +321,13 @@ fetch("sets.json", { cache: "no-cache" })
   .then((data) => {
     // Tolerate "Sealed" / "Available " etc. so a capital letter in sets.json can't change a listing.
     const norm = (v) => (typeof v === "string" ? v.trim().toLowerCase() : v);
-    sets = data.map((s) => ({ ...s, condition: norm(s.condition), status: norm(s.status), type: norm(s.type) }));
+    sets = data.map((s) => {
+      const q = s.quantity == null || s.quantity === "" ? null : Number(s.quantity);
+      const quantity = Number.isInteger(q) && q >= 0 ? q : null;
+      // Quantity 0 means every copy is gone, so the listing shows as Sold without editing the status.
+      const status = quantity === 0 ? "sold" : norm(s.status);
+      return { ...s, condition: norm(s.condition), status, type: norm(s.type), quantity };
+    });
     buildThemeSelect();
     const shared = readHash();
     syncControls();
