@@ -27,6 +27,11 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   Gmail account (tested and working, 2026-10-19). Replies can use Gmail "Send mail as"
   (not set up yet). Never use his personal email or home address on the site, and
   do not write the Gmail address into this repo.
+- **Shipping and insurance (Lyle, 2026-10-31):** US addresses only; shipping is quoted by email after a
+  request (no calculator). Sets priced over $100 ship via USPS, insured for full value at Lyle's cost
+  (Pirate Ship InsureShield is $1.00 per $100 declared, rounded up; USPS Ground Advantage and Priority
+  Mail include $100 free; Pirate Ship support article dated 2026-09-14). UPS Ground Saver includes only
+  $50 and Media Mail none, so those are not used for sets.
 - **Selling rule: first come, first served.** Sets are limited; the earliest request gets
   the set. Replace the spec's "the set is held for you" wording on the confirmation and
   "How buying works" text with a first-come, first-served statement, for example that
