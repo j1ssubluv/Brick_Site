@@ -287,10 +287,23 @@
     "retired": true
   },
   {
+    "setNumber": "76271",
+    "name": "The Animated Series Gotham City",
+    "theme": "Batman",
+    "year": 2021,
+    "pieces": 4210,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 560.00,
+    "photos": ["images/76271.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "setNumber": "76179",
     "name": "Batman & Selina Kyle Motorcycle Pursuit",
     "theme": "Batman",
-    "year": 2021,
+    "year": 2024,
     "pieces": 149,
     "condition": "sealed",
     "conditionNotes": "Great condition",
@@ -417,6 +430,45 @@
     "retired": true
   },
   {
+    "setNumber": "60298",
+    "name": "Rocket Stunt Bike",
+    "theme": "Lego City Stuntz",
+    "year": 2021,
+    "pieces": 14,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 18.00,
+    "photos": ["images/60298.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "60310",
+    "name": "Chicken Stunt Bike",
+    "theme": "Lego City Stuntz",
+    "year": 2021,
+    "pieces": 10,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 11.50,
+    "photos": ["images/60310.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "60311",
+    "name": "Fire Stunt Bike",
+    "theme": "Lego City Stuntz",
+    "year": 2021,
+    "pieces": 11,
+    "condition": "sealed",
+    "conditionNotes": "Good condition",
+    "price": 12.50,
+    "photos": ["images/60311.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "setNumber": "60332",
     "name": "Reckless Scorpion Stunt Bike",
     "theme": "Lego City Stuntz",
@@ -424,8 +476,8 @@
     "pieces": 15,
     "condition": "sealed",
     "conditionNotes": "Great condition",
-    "price": 10.00,
-    "quantity": 2,
+    "price": 13.00,
+    "quantity": 3,
     "photos": ["images/60332.jpg"],
     "status": "available",
     "retired": true
