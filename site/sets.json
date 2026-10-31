@@ -439,19 +439,7 @@
     "condition": "sealed",
     "conditionNotes": "Great condition",
     "price": 15.00,
-    "photos": ["images/60356.jpg"],
-    "status": "available",
-    "retired": true
-  },
-  {
-    "setNumber": "60356",
-    "name": "Bear Stunt Bike",
-    "theme": "Lego City Stuntz",
-    "year": 2023,
-    "pieces": 10,
-    "condition": "sealed",
-    "conditionNotes": "Great condition",
-    "price": 15.00,
+    "quantity": 2,
     "photos": ["images/60356.jpg"],
     "status": "available",
     "retired": true
