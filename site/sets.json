@@ -125,19 +125,7 @@
     "condition": "sealed",
     "conditionNotes": "Great condition",
     "price": 700.00,
-    "photos": ["images/71006.jpg"],
-    "status": "available",
-    "retired": true
-  },
-  {
-    "setNumber": "71006",
-    "name": "The Simpsons House",
-    "theme": "The Simpsons",
-    "year": 2014,
-    "pieces": 2523,
-    "condition": "sealed",
-    "conditionNotes": "Great condition",
-    "price": 700.00,
+    "quantity": 2,
     "photos": ["images/71006.jpg"],
     "status": "available",
     "retired": true
@@ -437,19 +425,7 @@
     "condition": "sealed",
     "conditionNotes": "Great condition",
     "price": 10.00,
-    "photos": ["images/60332.jpg"],
-    "status": "available",
-    "retired": true
-  },
-  {
-    "setNumber": "60332",
-    "name": "Reckless Scorpion Stunt Bike",
-    "theme": "Lego City Stuntz",
-    "year": 2022,
-    "pieces": 15,
-    "condition": "sealed",
-    "conditionNotes": "Great condition",
-    "price": 10.00,
+    "quantity": 2,
     "photos": ["images/60332.jpg"],
     "status": "available",
     "retired": true
@@ -489,19 +465,7 @@
     "condition": "sealed",
     "conditionNotes": "Great condition",
     "price": 25.00,
-    "photos": ["images/60331.jpg"],
-    "status": "available",
-    "retired": true
-  },
-  {
-    "setNumber": "60331",
-    "name": "Touring Stunt Bike",
-    "theme": "Lego City Stuntz",
-    "year": 2022,
-    "pieces": 10,
-    "condition": "sealed",
-    "conditionNotes": "Great condition",
-    "price": 25.00,
+    "quantity": 2,
     "photos": ["images/60331.jpg"],
     "status": "available",
     "retired": true
