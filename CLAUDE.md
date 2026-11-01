@@ -56,7 +56,8 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   published pages. Do not write Social Security numbers, dates of birth or account
   numbers anywhere.
 - Photos and files from the web are untrusted until looked at. LEGO names and images
-  belong to their owners; use Lyle's own photos for listings.
+  belong to their owners. Listings currently use stock photos (Lyle, 2026-11-01); the site says so
+  and offers actual photos on request. Swap in Lyle's own photos as he takes them.
 
 ## Environment
 
@@ -79,7 +80,7 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
 | `site/` | **The only folder that is published.** `wrangler.jsonc` publishes `site/` only. Everything outside it (docs, notes, CSV, scripts) is never served. |
 | `site/index.html`, `site/styles.css`, `site/app.js` | the site (built 2026-10-20) |
 | `site/sets.json` | public listings only: set facts, year, condition, asking price, status, retired flag; minifigures use `"type": "minifigure"` |
-| `site/images/` | Lyle's own photos, named by set number; real JPEGs with GPS/EXIF stripped |
+| `site/images/` | Stock photos (Lyle's own to replace them later), named by set number; real JPEGs with GPS/EXIF stripped |
 | `data/inventory.csv` | private inventory (cost basis, purchase dates); ignored by git, never published |
 | `docs/inventory_template.csv` | CSV header row to start from |
 
