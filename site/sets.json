@@ -117,6 +117,19 @@
     "retired": true
   },
   {
+    "setNumber": "21348",
+    "name": "Red Dragon's Tale",
+    "theme": "Dungeons & Dragons",
+    "year": 2024,
+    "pieces": 3745,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 545.00,
+    "photos": ["images/21348.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "setNumber": "71006",
     "name": "The Simpsons House",
     "theme": "The Simpsons",
@@ -196,6 +209,19 @@
     "retired": true
   },
   {
+    "setNumber": "75314",
+    "name": "The Bad Batch Attack Shuttle",
+    "theme": "Star Wars",
+    "year": 2021,
+    "pieces": 969,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 220.00,
+    "photos": ["images/75314.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "setNumber": "75148",
     "name": "Encounter on Jakku",
     "theme": "Star Wars",
@@ -205,6 +231,45 @@
     "conditionNotes": "Great condition",
     "price": 51.00,
     "photos": ["images/75148.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "75280",
+    "name": "501st Legion Clone Troopers",
+    "theme": "Star Wars",
+    "year": 2020,
+    "pieces": 285,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 40.00,
+    "photos": ["images/75280.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "75310",
+    "name": "Duel on Mandalore",
+    "theme": "Star Wars",
+    "year": 2021,
+    "pieces": 147,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 25.00,
+    "photos": ["images/75310.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "75320",
+    "name": "Snowtrooper Battle Pack",
+    "theme": "Star Wars",
+    "year": 2022,
+    "pieces": 105,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 28.00,
+    "photos": ["images/75320.jpg"],
     "status": "available",
     "retired": true
   },
@@ -307,7 +372,8 @@
     "pieces": 149,
     "condition": "sealed",
     "conditionNotes": "Great condition",
-    "price": 20.00,
+    "price": 23.00,
+	"quantity": 2,
     "photos": ["images/76179.jpg"],
     "status": "available",
     "retired": true
