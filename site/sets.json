@@ -235,6 +235,19 @@
     "retired": true
   },
   {
+    "setNumber": "75283",
+    "name": "Armored Assault Tank (AAT)",
+    "theme": "Star Wars",
+    "year": 2020,
+    "pieces": 286,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 53.00,
+    "photos": ["images/75283.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
     "setNumber": "75280",
     "name": "501st Legion Clone Troopers",
     "theme": "Star Wars",
@@ -625,6 +638,20 @@
     "conditionNotes": "Great condition",
     "price": 475.00,
     "photos": ["images/71040.jpg"],
+    "status": "available",
+    "retired": true
+  },
+  {
+    "setNumber": "76956",
+    "name": "Jurassic Park T.rex Breakout",
+    "theme": "Jurassic Park",
+    "year": 2022,
+    "pieces": 1212,
+    "condition": "sealed",
+    "conditionNotes": "Great condition",
+    "price": 160.00,
+    "quantity": 2,
+    "photos": ["images/76956.jpg"],
     "status": "available",
     "retired": true
   },
