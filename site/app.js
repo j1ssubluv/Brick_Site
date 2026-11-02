@@ -40,7 +40,7 @@ const detail = (s) =>
 // "N available" / "Only N left" and adds a "How many?" box to the request form. At 0 the
 // listing shows as Sold by itself. Entries without it behave as a single item.
 const hasQty = (s) => s.quantity != null;
-const stockLabel = (s) => (s.quantity <= 3 ? "Only " + s.quantity + " left" : s.quantity + " available");
+const stockLabel = (s) => (s.quantity <= 2 ? "Only " + s.quantity + " left" : s.quantity + " available");
 
 function conditionLabel(s) {
   if (s.condition === "sealed") return "New · Sealed";
@@ -111,7 +111,7 @@ function render() {
       el("h3", null, s.name),
       el("p", "meta", detail(s)),
       ...(s.conditionNotes ? [el("p", "notes", s.conditionNotes)] : []),
-      ...(hasQty(s) && s.status === "available" ? [el("p", "stock" + (s.quantity <= 3 ? " low" : ""), stockLabel(s))] : [])
+      ...(hasQty(s) && s.status === "available" ? [el("p", "stock" + (s.quantity <= 2 ? " low" : ""), stockLabel(s))] : [])
     );
     const foot = el("div", "card-foot");
     const price = el("span", "price", money(s.price));
@@ -142,7 +142,7 @@ function openPanel(s, trigger) {
     el("h3", null, s.name),
     el("p", "meta", detail(s)),
     ...(s.conditionNotes ? [el("p", "notes full", s.conditionNotes)] : []),
-    ...(hasQty(s) ? [el("p", "stock" + (s.quantity <= 3 ? " low" : ""), stockLabel(s))] : []),
+    ...(hasQty(s) ? [el("p", "stock" + (s.quantity <= 2 ? " low" : ""), stockLabel(s))] : []),
     el("p", "price", money(s.price) + (hasQty(s) && s.quantity > 1 ? " each" : ""))
   );
   form.hidden = false;
