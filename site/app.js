@@ -18,6 +18,15 @@ const clearBtn = document.getElementById("clear-filters");
 const DEFAULTS = { condition: "all", retired: "all", theme: "all", q: "" };
 const filters = { ...DEFAULTS };
 let current = null;
+
+// Hover zoom on card photos: the zoom (see styles.css) centres on the cursor.
+grid.addEventListener("mousemove", (e) => {
+  const photo = e.target.closest(".photo");
+  const img = photo && photo.querySelector("img");
+  if (!img) return;
+  const r = photo.getBoundingClientRect();
+  img.style.transformOrigin = ((e.clientX - r.left) / r.width) * 100 + "% " + ((e.clientY - r.top) / r.height) * 100 + "%";
+});
 let lastTrigger = null;
 
 // Whole dollars show without cents ($100); anything with cents shows two places ($12.50).

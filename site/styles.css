@@ -111,6 +111,15 @@ nav a:hover { color: var(--accent); }
   display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 14px;
 }
 .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Mouse hover on a card photo zooms in; app.js moves the zoom point with the cursor */
+@media (hover: hover) {
+  .grid .photo { overflow: hidden; cursor: zoom-in; }
+  .grid .photo img { transition: transform .15s ease-out; }
+  .grid .photo:hover img { transform: scale(2); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grid .photo img { transition: none; }
+}
 .badge {
   position: absolute; top: 12px; left: 12px; padding: 3px 10px; border-radius: 999px;
   font-size: 12px; font-weight: 600; background: var(--used); color: var(--ink);
