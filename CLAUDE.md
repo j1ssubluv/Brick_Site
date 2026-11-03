@@ -24,8 +24,13 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   `info@retiredbrickco.com`, domain `retiredbrickco.com`. Use these in place of the spec's
   placeholders ("Your Brick Shop", `[your shop email]`). Lyle bought the domain at
   Cloudflare Registrar and Cloudflare Email Routing forwards `info@` to a dedicated shop
-  Gmail account (tested and working, 2026-10-19). Replies can use Gmail "Send mail as"
-  (not set up yet). Never use his personal email or home address on the site, and
+  Gmail account (tested and working, 2026-10-19). Gmail "Send mail as"
+  is set up (Lyle, 2026-11-03): replies go out as Retired Brick Co. `<info@retiredbrickco.com>`
+  through Gmail's SMTP with an app password, and show "via gmail.com". It needed the domain's SPF
+  TXT record (Cloudflare DNS) to include Google: `v=spf1 include:_spf.mx.cloudflare.net
+  include:_spf.google.com ~all`; keep it a single SPF record. No DKIM or DMARC record yet; add
+  them if buyers' mail lands in spam. Incoming mail to `info@` still arrives through Cloudflare Email
+  Routing. Never use his personal email or home address on the site, and
   do not write the Gmail address into this repo.
 - **Shipping and insurance (Lyle, 2026-10-31):** US addresses only; shipping is quoted by email after a
   request (no calculator). Sets priced over $100 ship via USPS, insured at Lyle's cost
