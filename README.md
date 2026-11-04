@@ -57,6 +57,26 @@ request form asks "How many?". When a copy sells, lower the number in `site/sets
 push. At `"quantity": 0` the listing shows as Sold on its own. Entries without `quantity` behave
 as a single item. The count only changes when you edit the file, so two buyers can still request the
 last copy; first come, first served, and nothing is reserved until you confirm.
+
+### Featured set
+
+Add `"featured": true` to one listing in `site/sets.json` to show it in the hero at the top of the
+page. If several are marked, the first in the file is used. A sold or pending set is skipped and the
+hero shows plain text again.
+
+### Search and link previews
+
+- `site/index.html` has link-preview tags (title, description, `og-image.png`) so a pasted link shows a
+  card on Facebook, Discord and in texts. Previews are often cached by the sites that show them, so a
+  change can take a while to appear. The image is `site/og-image.png`, 1200 x 630.
+- `site/sitemap.xml` lists the one page, and `site/robots.txt` points to it. Update the sitemap date
+  only if the site changes in a way that matters.
+- Google Search Console is verified as a **Domain** property for `retiredbrickco.com` through a DNS TXT record
+  in Cloudflare (Records > TXT, name `@`, content starting `google-site-verification=`). Keep that record. It sits
+  beside the SPF TXT record (`v=spf1 ...`, used for email), so do not merge or edit the two together. The sitemap
+  was submitted at `https://retiredbrickco.com/sitemap.xml` (Domain properties need the full address) and
+  Google reported Success on 2026-11-04. Whether the page appears in search is up to Google.
+
 ### Before launch
 
 - Set `FORMSPREE_ENDPOINT` in `site/app.js` to the Formspree form URL. While it is blank, the

@@ -39,6 +39,14 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   (Pirate Ship InsureShield is $1.00 per $100 declared, rounded up; USPS Ground Advantage and Priority
   Mail include $100 free; Pirate Ship support article dated 2026-09-14). UPS Ground Saver includes only
   $50 and Media Mail none, so those are not used for sets.
+- **Search and link previews (Lyle, 2026-11-04):** `site/sitemap.xml` (one address, the whole shop is one
+  page) and `site/robots.txt` are published. Link-preview tags (Open Graph, large Twitter card) are in
+  `site/index.html` with the image `site/og-image.png` (1200x630). Google Search Console is verified as a
+  **Domain** property (`retiredbrickco.com`) by a DNS TXT record (`google-site-verification=...`) in Cloudflare DNS,
+  and the sitemap was submitted and accepted. Keep that TXT record: removing it can un-verify the site.
+  It is a separate TXT record next to the SPF record (`v=spf1 ...`, which carries the email setup). Never merge the
+  two, and keep SPF as a single record. Cloudflare also serves its own robots.txt text; check the live
+  `/robots.txt` after editing the file.
 - **Selling rule: first come, first served.** Sets are limited; the earliest request gets
   the set. Replace the spec's "the set is held for you" wording on the confirmation and
   "How buying works" text with a first-come, first-served statement, for example that
