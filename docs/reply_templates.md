@@ -28,16 +28,7 @@ until Lyle confirms, so "holding it for you" starts with template 1.
 > Retired Brick Co.
 > retiredbrickco.com
 
-## 2. Local pickup
-
-> Hi [buyer name],
->
-> The [set name] ([set number]) is available for local pickup at $[price], cash on pickup. I can meet in [public place, e.g. a store parking lot] on [days/times]. Tell me what works and I'll confirm.
->
-> Thanks,
-> Lyle
-
-## 3. Already sold or pending
+## 2. Already sold or pending
 
 > Hi [buyer name],
 >
