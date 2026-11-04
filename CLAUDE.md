@@ -12,8 +12,10 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   `www` are attached under the project's Domains & Routes (both live, confirmed 2026-10-22). "Always Use HTTPS" is on. Security headers and CSP live in `site/_headers`. Checked in docs: $0 plan, unlimited bandwidth, 500 builds a month,
   20,000 files, 25 MiB per file. Domain registration is a separate yearly cost (not verified).
   Not on Claude Cloud pages (no customer accounts or public database writes there).
-- **Payments: PayPal Goods and Services, plus cash at local pickup. Nothing else.** The
-  spec's Zelle and Venmo lines are removed because they carry no buyer or seller protection.
+- **Payments: PayPal Goods and Services only. Nothing else.** Local pickup and cash were
+  removed from the site (Lyle, 2026-11-04); the request form has no ship/pickup choice and
+  always asks for a ZIP. The spec's Zelle and Venmo lines are removed because they carry no
+  buyer or seller protection.
   The site never collects payment data; Lyle sends the PayPal request himself after confirming.
 - **No customer accounts, cart or order database.** Browse is public; "Request to buy" is a form.
 - **Request form:** Formspree free tier emails requests to Lyle (50 submissions a month,

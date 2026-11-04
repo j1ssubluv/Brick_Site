@@ -141,7 +141,8 @@
     "quantity": 2,
     "photos": ["images/71006.jpg"],
     "status": "available",
-    "retired": true
+    "retired": true,
+    "featured": true
   },
   {
     "setNumber": "71042",

@@ -140,6 +140,39 @@ function render() {
   });
 }
 
+// The first listing marked "featured": true in sets.json that is still available shows in the hero.
+function renderFeatured() {
+  const box = document.getElementById("featured");
+  const wrap = document.getElementById("hero-wrap");
+  const s = sets.find((x) => x.featured === true && x.status === "available");
+  box.replaceChildren();
+  box.hidden = !s;
+  wrap.classList.toggle("has-feature", !!s);
+  if (!s) return;
+  const card = el("article", "card");
+  const photo = photoBox(s);
+  photo.appendChild(badge(s));
+  const body = el("div", "card-body");
+  body.append(
+    el("span", "pill-tag", "FEATURED SET"),
+    el("p", "theme", isFigure(s) && s.series ? s.series : s.theme),
+    el("h3", null, s.name),
+    el("p", "meta", detail(s)),
+    ...(s.conditionNotes ? [el("p", "notes", s.conditionNotes)] : []),
+    ...(hasQty(s) ? [el("p", "stock" + (s.quantity <= 2 ? " low" : ""), stockLabel(s))] : [])
+  );
+  const foot = el("div", "card-foot");
+  const price = el("span", "price", money(s.price));
+  if (hasQty(s) && s.quantity > 1) price.appendChild(el("span", "unit", " each"));
+  const b = el("button", "btn", "Request to buy");
+  b.type = "button";
+  b.addEventListener("click", () => openPanel(s, b));
+  foot.append(price, b);
+  body.appendChild(foot);
+  card.append(photo, body);
+  box.appendChild(card);
+}
+
 function openPanel(s, trigger) {
   current = s;
   lastTrigger = trigger;
@@ -176,10 +209,6 @@ function closePanel() {
   if (lastTrigger && document.contains(lastTrigger)) lastTrigger.focus();
 }
 
-function syncZip() {
-  document.getElementById("zip-field").hidden = form.elements.delivery.value !== "Ship";
-}
-
 function validate() {
   if (!form.elements.name.value.trim()) return "Please enter your name.";
   const email = form.elements.email.value.trim();
@@ -202,7 +231,7 @@ function mailtoHref() {
     "",
     "Name: " + f.name.value.trim(),
     "Email: " + f.email.value.trim(),
-    "Delivery: " + (f.delivery.value === "Ship" ? "Ship, ZIP " + f.zip.value.trim() : "Local pickup"),
+    "Ship to ZIP: " + f.zip.value.trim(),
     "",
     f.message.value.trim(),
   ];
@@ -249,11 +278,9 @@ form.addEventListener("submit", async (e) => {
   }
 });
 
-form.querySelectorAll('input[name="delivery"]').forEach((r) => r.addEventListener("change", syncZip));
 document.getElementById("req-close").addEventListener("click", closePanel);
 document.getElementById("req-keep").addEventListener("click", () => {
   form.reset();
-  syncZip();
   closePanel();
 });
 document.addEventListener("keydown", (e) => {
@@ -324,7 +351,6 @@ window.addEventListener("hashchange", () => {
   if (readHash()) { syncControls(); render(); }
 });
 
-syncZip();
 fetch("sets.json", { cache: "no-cache" })
   .then((r) => r.json())
   .then((data) => {
@@ -338,6 +364,7 @@ fetch("sets.json", { cache: "no-cache" })
       return { ...s, condition: norm(s.condition), status, type: norm(s.type), quantity };
     });
     buildThemeSelect();
+    renderFeatured();
     const shared = readHash();
     syncControls();
     render();
