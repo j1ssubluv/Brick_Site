@@ -23,6 +23,10 @@ until Lyle confirms, so "holding it for you" starts with template 1.
 >
 > I'll send a PayPal Goods and Services request for the total to this email address. It takes a minute to pay, and the PayPal buyer protection applies. The set ships with tracking once the payment arrives, usually within [2 business days].
 >
+> For your safety, the only way I take payment online is a PayPal request sent from PayPal itself. I will never send a bill, invoice or payment link any other way, and I'll never ask for Zelle, Venmo, gift cards or a wire. If something claiming to be from me asks for payment another way, don't pay it, and email me here.
+>
+> If you don't see my emails or the PayPal request, check your Spam and Promotions folders.
+>
 > Thanks,
 > Lyle
 > Retired Brick Co.

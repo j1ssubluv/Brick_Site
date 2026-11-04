@@ -30,8 +30,12 @@ and Services request. Full build spec: `docs/Storefront_Spec.md` (Lyle's own, 20
   is set up (Lyle, 2026-11-03): replies go out as Retired Brick Co. `<info@retiredbrickco.com>`
   through Gmail's SMTP with an app password, and show "via gmail.com". It needed the domain's SPF
   TXT record (Cloudflare DNS) to include Google: `v=spf1 include:_spf.mx.cloudflare.net
-  include:_spf.google.com ~all`; keep it a single SPF record. No DKIM or DMARC record yet; add
-  them if buyers' mail lands in spam. Incoming mail to `info@` still arrives through Cloudflare Email
+  include:_spf.google.com ~all`; keep it a single SPF record. DMARC is published (Lyle, 2026-11-04):
+  TXT `_dmarc` = `v=DMARC1; p=none; rua=mailto:info@retiredbrickco.com` (reports go to `info@`).
+  **Keep `p=none`.** Replies go out through Gmail, which signs as gmail.com, so they do not align
+  with this domain; `quarantine` or `reject` would likely send Lyle's replies to spam or bounce them.
+  Only tighten it after a DKIM key for the domain exists (not possible with this setup as far as we
+  know; untested). No DKIM record yet. Incoming mail to `info@` still arrives through Cloudflare Email
   Routing. Never use his personal email or home address on the site, and
   do not write the Gmail address into this repo.
 - **Shipping and insurance (Lyle, 2026-10-31):** US addresses only; shipping is quoted by email after a
